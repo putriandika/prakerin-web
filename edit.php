@@ -4,8 +4,11 @@ include('connection.php');
 
 $id     = $_GET['id'];
 
-$query  = mysqli_query($connect, "SELECT * FROM tb_bank WHERE id='$id' ");
-$result = mysqli_fetch_all($query, MYSQLI_ASSOC);
+$query  = mysqli_query($connect, "SELECT * FROM tb_valas WHERE id='$id' ");
+$result_valas = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+$query_bank = mysqli_query($connect, "SELECT nama FROM tb_bank");
+$results    = mysqli_fetch_all($query_bank, MYSQLI_ASSOC);
 
 ?>
 
@@ -26,24 +29,36 @@ $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
     <div class="container" style="width: 45%;">
     <form action="update.php" method="post" style="padding: 50px;margin: 150px auto;box-shadow: 3px 3px 5px rgba(0,0,0,0.5);" class="bg-light">
-            <input type="hidden" name="id" value=<?php echo $result[0]['id']?>>
+            <input type="hidden" name="id" value=<?php echo $result_valas[0]['id']?>>
             <div class="row justify-content-start mb-3">
                 <div class="col-md-3 col-xs-12"><label>Nama Bank</label></div>
-                <div class="col-md-3 col-xs-12"><input type="text" name="nama" value="<?php echo $result[0]['nama']?>" required></div>
+                <div class="col-md-3 col-xs-12">
+                     <select name="nama_bank" style="width: 180px;" required>
+                        <?php foreach ($results as $result) : ?>
+                            <option value="<?php echo $result ['nama']?>">                      
+                                <?php echo $result['nama'] ?>                        
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
             </div>
             <div class="row justify-content-start mb-3">
-                <div class="col-md-3 col xs-12"><label>Url</label></div>
-                <div class="col-md-3 col xs-12"><input type="text" name="url" value="<?php echo $result[0]['url']?>" required></div>
+                <div class="col-md-3 col xs-12"><label>Nilai Beli</label></div>
+                <div class="col-md-3 col xs-12"><input type="text" name="beli" value="<?php echo $result_valas[0]['beli']?>" placeholder="Rp..." required></div>
             </div>
             <div class="row justify-content-start mb-3">
-                <div class="col-md-3 col xs-12"><label>Logo</label></div>
-                <div class="col-md-3 col xs-12"><input type="file" name="logo" value="<?php echo $result[0]['logo']?>" required></div>
+                <div class="col-md-3 col xs-12"><label>Nilai Jual</label></div>
+                <div class="col-md-3 col xs-12"><input type="text" name="jual" value="<?php echo $result_valas[0]['jual']?>" placeholder="Rp..." required></div>
             </div>
             <div class="row justify-content-start mb-4">
-                <div class="col-md-3 col xs-12"><label>Status</label></div>
+                <div class="col-md-3 col xs-12"><label>Mata Uang</label></div>
                 <div class="col-md-3 col xs-12">
-                    <input type="radio" name="status" value="Aktif" required>Aktif<br>
-                    <input type="radio" name="status" value="Tidak Aktif">Tidak Aktif
+                    <select name="mata_uang" style="width: 180px;" required>
+                        <option value="usd">USD</option>
+                        <option value="sgd">SGD</option>
+                        <option value="eur">EUR</option>
+                        <option value="idr">IDR</option>
+                    </select>
                 </div>
             </div>
             <div class="row">

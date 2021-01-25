@@ -2,15 +2,17 @@
 
 include('connection.php');
 
-$id     = $_POST['id'];
-$nama   = $_POST['nama'];
-$url    = $_POST['url'];
-$logo   = $_POST['logo'];
-$status = $_POST['status'];
+$id         = $_POST['id'];
+$nama       = $_POST['nama_bank'];
+$beli       = $_POST['beli'];
+$jual       = $_POST['jual'];
+$mata_uang  = $_POST['mata_uang'];
 
-$update = mysqli_query($connect, "UPDATE tb_bank SET nama='$nama', url='$url', logo='$logo', status='$status' WHERE id='$id' ");
+$update = mysqli_query($connect, "UPDATE tb_valas SET bank_id='$nama', beli='$beli', jual='$jual', mata_uang='$mata_uang' WHERE id='$id' ");
 
-
-header('Location:index.php');
+if ($update)
+    header('Location:index.php');
+else
+    echo 'Update Gagal...';
 
 ?>

@@ -2,8 +2,8 @@
 
 include('connection.php');
 
-$query      = mysqli_query($connect, "SELECT * FROM tb_bank");
-$results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
+$query          = mysqli_query($connect, "SELECT * FROM tb_valas");
+$results        = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 ?>
 
@@ -31,6 +31,7 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
             text-align: center;
             font-weight: bold;
             margin-bottom: 25px;
+            text-transform: uppercase;
         }
 
         .container table{
@@ -68,13 +69,13 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
         }
     </style>
 
-    <title>Data Bank</title>
+    <title>Data Valas</title>
   </head>
   <body>
     
     <div class="container">
 
-    <h3>DATA BANK</h3>
+    <h3>data valas</h3>
 
     <a href="add.php" class="tambah">Tambah Data</a>
 
@@ -82,18 +83,18 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
             <tr>
                 <th class="nomer">no</th>
                 <th>nama bank</th>
-                <th>url</th>
-                <th>logo</th>
-                <th>status</th>
+                <th>nilai beli</th>
+                <th>nilai jual</th>
+                <th>last update</th>
                 <th>more options</th>
             </tr>
             <?php foreach ($results as $result) : ?>
                 <tr>
                     <td class="nomer"><?php echo $result['id']?></td>
-                    <td><?php echo $result['nama']?></td>
-                    <td class="url"><?php echo $result['url']?></td>
-                    <td><?php echo $result['logo']?></td>
-                    <td><?php echo $result['status']?></td>
+                    <td><?php echo $result['bank_id']?></td>
+                    <td class="url"><?php echo $result['beli']?></td>
+                    <td><?php echo $result['jual']?></td>
+                    <td><?php echo $result['date_updated']?></td>
                     <td>
                         <a href="edit.php?id=<?php echo $result['id']?>">Edit |</a>
                         <a href="delete.php?id=<?php echo $result['id']?>"> hapus</a>

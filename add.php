@@ -1,3 +1,14 @@
+<?php
+
+include('connection.php');
+
+$query      = mysqli_query($connect, "SELECT nama FROM tb_bank");
+$results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,21 +36,33 @@
         <form action="insert.php" method="post" class="bg-light"> 
             <div class="row justify-content-start mb-3">
                 <div class="col-md-3 col-xs-12"><label>Nama Bank</label></div>
-                <div class="col-md-3 col-xs-12"><input type="text" name="nama" required autofocus></div>
+                <div class="col-md-3 col-xs-12">
+                    <select name="nama_bank" style="width: 180px;" required>
+                        <?php foreach ($results as $result) : ?>
+                            <option value="<?php echo $result ['nama']?>">                      
+                                <?php echo $result['nama'] ?>                        
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
             </div>
             <div class="row justify-content-start mb-3">
-                <div class="col-md-3 col xs-12"><label>Url</label></div>
-                <div class="col-md-3 col xs-12"><input type="text" name="url" required></div>
+                <div class="col-md-3 col xs-12"><label>Nilai Beli</label></div>
+                <div class="col-md-3 col xs-12"><input type="text" name="beli" placeholder="Rp..." required></div>
             </div>
             <div class="row justify-content-start mb-3">
-                <div class="col-md-3 col xs-12"><label>Logo</label></div>
-                <div class="col-md-3 col xs-12"><input type="file" name="logo" required></div>
+                <div class="col-md-3 col xs-12"><label>Nilai Jual</label></div>
+                <div class="col-md-3 col xs-12"><input type="text" name="jual" placeholder="Rp..." required></div>
             </div>
             <div class="row justify-content-start mb-4">
-                <div class="col-md-3 col xs-12"><label>Status</label></div>
-                <div class="col-md-3 col xs-12" aria-required="true">
-                    <input type="radio" name="status" value="Aktif" required>Aktif<br>
-                    <input type="radio" name="status" value="Tidak Aktif">Tidak Aktif
+                <div class="col-md-3 col xs-12"><label>Mata Uang</label></div>
+                <div class="col-md-3 col xs-12">
+                    <select name="mata_uang" style="width: 180px;" required>
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="sgd">SGD</option>
+                        <option value="idr">IDR</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
