@@ -1,9 +1,8 @@
 <?php
 
-include('connection.php');
-
-$query          = mysqli_query($connect, "SELECT * FROM tb_valas");
-$results        = mysqli_fetch_all($query, MYSQLI_ASSOC);
+include ('connection.php');
+$query      = mysqli_query($connect, "SELECT * FROM tb_valas");
+$results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 ?>
 
@@ -17,93 +16,48 @@ $results        = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
 
-        .container{
-            padding: 50px;
-        }
-
-        .container h3{
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .container table{
-            margin: 0px auto;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-
-        .container th, .container td{
-            width: 250px;
-            text-align: center;
-            padding: 10px 0px;
-        }
-
-        .container th{
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .container td{
-            font-weight: 500;
-        }
-
-        table .nomer{
-            width: 75px;
-        }
-
-        .container .url{
-            text-transform: lowercase;
-        }
-
-        .container .tambah{
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-    </style>
-
-    <title>Data Valas</title>
   </head>
   <body>
     
-    <div class="container">
+    
+    
+    <div class="container" style="text-transform: uppercase;">
+        <h1 class="text-center mb-3 mt-4" style="font-weight: 700;">data valas</h1>
+            <a href="add.php" style="font-weight: 500;font-size:1.1em" class="text-info">tambah data</a>   
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover mt-3">
+                        <thead class="table-info">
+                            <tr>
+                                <th class="col-xs-12 text-center" style="width: 50px;">no</th>
+                                <th class="col-xs-12 text-center" style="width:200px;">nama bank</th>
+                                <th class="col-xs-12 text-center" style="width:200px;">nilai beli</th>
+                                <th class="col-xs-12 text-center" style="width:200px;">nilai jual</th>
+                                <th class="col-xs-12 text-center" style="width:200px;">last update</th>
+                                <th class="col-xs-12 text-center" style="width:200px;">more options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($results as $result) : ?>
+                                <tr class="text-center table-light" style="font-weight: 500;">
+                                    <td class="nomer"><?php echo $result['id']?></td>
+                                    <td><?php echo $result['bank_id']?></td>
+                                    <td class="url"><?php echo $result['beli']?></td>
+                                    <td><?php echo $result['jual']?></td>
+                                    <td><?php echo $result['date_updated']?></td>
+                                    <td>
+                                        <a href="edit_tambah_valas.php?id=<?php echo $result['id']?>">Edit |</a>
+                                        <a href="delete_tambah_valas.php?id=<?php echo $result['id']?>"> hapus</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>               
+                        </tbody>   
+                    </table>   
+                </div>
+        </div>
+                    
 
-    <h3>data valas</h3>
 
-    <a href="add.php" class="tambah">Tambah Data</a>
-
-        <table border="2">
-            <tr>
-                <th class="nomer">no</th>
-                <th>nama bank</th>
-                <th>nilai beli</th>
-                <th>nilai jual</th>
-                <th>last update</th>
-                <th>more options</th>
-            </tr>
-            <?php foreach ($results as $result) : ?>
-                <tr>
-                    <td class="nomer"><?php echo $result['id']?></td>
-                    <td><?php echo $result['bank_id']?></td>
-                    <td class="url"><?php echo $result['beli']?></td>
-                    <td><?php echo $result['jual']?></td>
-                    <td><?php echo $result['date_updated']?></td>
-                    <td>
-                        <a href="edit.php?id=<?php echo $result['id']?>">Edit |</a>
-                        <a href="delete.php?id=<?php echo $result['id']?>"> hapus</a>
-                    </td>
-                </tr>
-            <?php endforeach ?>
-        </table>
-
-    </div>
 
 
 
