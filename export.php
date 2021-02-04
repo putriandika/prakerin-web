@@ -5,7 +5,9 @@
 ?>
 <html>
 <head>
-  <title>DATA BANK</title>
+  <title>Sekolah Menengah Kejuruan Negeri 1 Pasuruan
+                        Jalan Veteran 11 Pasuruan, Telp/Fax (0343) 421380
+                        Website: www.smkn1-pasuruan.sch.id, Email: smkn1pasuruan@yahoo.com</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -24,6 +26,17 @@
 
 <body>
 <div class="container">
+<table width="90%" height="100px">
+                <tr>
+                    <td style="margin-left: 30px;"><img src="oke.png" width="120px" height="130px"></td>
+                    <td>
+                        <center>Sekolah Menengah Kejuruan Negeri 1 Pasuruan
+                        <p> Jalan Veteran 11 Pasuruan, Telp/Fax (0343) 421380</p>
+                        <p> Website: www.smkn1-pasuruan.sch.id, Email: smkn1pasuruan@yahoo.com</p>
+                        </center>
+                    </td>
+                </tr>
+            </table>
 			<h2 class="text-center mt-5 mb-5">data bank</h2>
 				<div class="data-tables datatable-dark">
 					
@@ -62,7 +75,10 @@ $(document).ready(function() {
             'copy','csv','excel', 'pdf', 'print'
         ]
     } );
+
 } );
+
+
 
 </script>
 
