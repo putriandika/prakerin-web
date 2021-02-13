@@ -15,16 +15,23 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    
+    <style>
+        @media print{
+            .tambah, .edit, .hapus, .aksi{
+                display: none;
+            }
+        }
+    </style>
 
   </head>
   <body>
     
     
-    
     <div class="container" style="text-transform: uppercase;">
         <h1 class="text-center mb-3 mt-4" style="font-weight: 700;">DATA BANK</h1>
-            <a href="add_tambah_bank.php" style="font-weight: 500;font-size:1.1em" class="text-info">tambah data</a>   
+            <a href="add_tambah_bank.php" style="font-weight: 500;font-size:1.1em" class="text-info tambah">tambah data </a>   
+            <a href="cetak.php" style="font-weight: 500;font-size:1.1em" class="text-info" target="_blank">| cetak</a>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover mt-3">
                         <thead class="table-info">
@@ -34,7 +41,7 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                 <th class="col-xs-12 text-center" style="width:200px;">url</th>
                                 <th class="col-xs-12 text-center" style="width:200px;">logo</th>
                                 <th class="col-xs-12 text-center" style="width:200px;">status</th>
-                                <th class="col-xs-12 text-center" style="width:200px;">more options</th>
+                                <th class="col-xs-12 text-center aksi" style="width:200px;">more options</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,8 +53,8 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     <td><?php echo $result['logo']?></td>
                                     <td><?php echo $result['status']?></td>
                                     <td>
-                                        <a href="edit_tambah_bank.php?id=<?php echo $result['id']?>">Edit |</a>
-                                        <a href="delete_tambah_bank.php?id=<?php echo $result['id']?>"> hapus</a>
+                                        <a href="edit_tambah_bank.php?id=<?php echo $result['id']?>" class="edit">Edit |</a>
+                                        <a href="delete_tambah_bank.php?id=<?php echo $result['id']?>" class="hapus"> hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach ?>               
