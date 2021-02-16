@@ -1,13 +1,29 @@
-body{
-    font-family: 'arial';
+body {
+  font-family: "arial";
 }
 
 tr:nth-child(even) {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 h4 {
-    text-align: center;
-    margin-top: -50px;
+  text-align: center;
+  margin-top: -50px;
 }
 
+table th,
+table td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+table {
+  margin-bottom: 60px;
+  margin-top: 30px;
+}
+
+p {
+  text-align: right;
+}

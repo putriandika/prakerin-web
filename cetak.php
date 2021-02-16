@@ -2,10 +2,11 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-include ('connection_tambah_bank.php');
+include('connection_tambah_bank.php');
 $query      = mysqli_query($connect, "SELECT * FROM tb_bank");
 $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
+$date   = date('l, d-m-Y');
 $html   = '
 <!DOCTYPE html>
 <html lang="en">
@@ -41,15 +42,16 @@ $html   = '
 $i = 1;
 foreach ($results as $result) {
     $html .= '<tr>
-        <td>'.$i++.'</td>
-        <td>'. $result['nama'] .'</td>
-        <td>'. $result['url'] .'</td>
-        <td>'. $result['logo'] .'</td>
-        <td>'. $result['status'] .'</td>
+        <td>' . $i++ . '</td>
+        <td>' . $result['nama'] . '</td>
+        <td>' . $result['url'] . '</td>
+        <td>' . $result['logo'] . '</td>
+        <td>' . $result['status'] . '</td>
     </tr>';
 }
 
 $html .= '</table>
+<p>' . $date . '</p>
 </body>
 </html>
 ';
