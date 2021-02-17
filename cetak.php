@@ -51,7 +51,7 @@ foreach ($results as $result) {
 }
 
 $html .= '</table>
-<p>' . $date . '</p>
+<footer>' . $date . '</footer>
 </body>
 </html>
 ';
