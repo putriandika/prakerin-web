@@ -8,34 +8,32 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="fontawesome/css/all.min.css">
-
-    <style>
-        .tombol {
-            margin-top: 25%;
-        }
-    </style>
+    <link rel="stylesheet" href="../fontawesome/css/all.min.css">
 
     <title>Hello, world!</title>
 </head>
 
 <body>
 
+
     <div class="container">
         <div class="row">
-            <div class="col-md-4 tombol">
-                <div class="row">
-                    <div class="col-md-3 mr-5">
-                        <a href="form/login.php" class="btn btn-lg btn-primary mb-3" style="width: 100px;">Login</a>
+            <div class="col-md-7 mt-5">
+                <form action="doRegister.php" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="username" class="form-control" id="username" name="username" placeholder="Username">
                     </div>
-                    <div class="col">
-                        <a href="form/register.php" class="btn btn-lg btn-success" style="width: 100px;">Register</a>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-success" name="register" style="width: 120px;">Register</button>
+                </form>
             </div>
         </div>
     </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
