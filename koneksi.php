@@ -1,3 +1,2 @@
-<?php
-
-$conn = mysqli_connect("localhost", "root", "", "valas_putri");
+<?php  
+    $connect    = mysqli_connect("localhost", "root", "", "online_shop");

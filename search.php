@@ -1,14 +1,17 @@
-<?php
+<?php 
 
-include('koneksi.php');
-$query      = mysqli_query($connect, "SELECT * FROM produk");
-$results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
+    include 'koneksi.php';
 
-?>
+    $cari       = $_GET['cari'];
+    $query      = mysqli_query($connect, "SELECT * FROM produk WHERE nama_produk LIKE  '%$cari%' ");
+    $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+
+ ?>
+
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,14 +19,10 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="fontawesome/css/all.min.css">
-
-    <title>Reka Tronik</title>
-</head>
-
-<body>
-
-
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark text-white bg-success fixed-top">
         <div class="container">
@@ -51,9 +50,9 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 </form>
                 <div class="icon mt-2">
                     <h5>
-                        <a href="keranjang.php"><i class="fas fa-shopping-cart ml-3 mr-3 text-white" data-toggle="tooltip" title="Keranjang"></i></a>
-                        <a href="#"><i class="fas fa-envelope mr-3 text-white" data-toggle="tooltip" title="Pesan"></i></a>
-                        <a href="#"><i class="fas fa-bell mr-3 text-white" data-toggle="tooltip" title="Nofitikasi"></i></a>
+                        <i class="fas fa-shopping-cart ml-3 mr-3" data-toggle="tooltip" title="Keranjang"></i>
+                        <i class="fas fa-envelope mr-3" data-toggle="tooltip" title="Pesan"></i>
+                        <i class="fas fa-bell mr-3" data-toggle="tooltip" title="Nofitikasi"></i>
                     </h5>
                 </div>
             </div>
@@ -61,15 +60,20 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
     </nav>
 
 
-    <!-- content -->
+    <div class='container'>
+        <h3 class="text-center" style="text-transform: uppercase; margin-top:70px;">Hasil Pencarian Dari <?php echo $cari; ?></h3>
 
-    <div class="container mb-5">
-        <div class="row ml-2" style="margin-top:80px;">
+        <?php if (empty($results)) : ?>
+            <div class="alert alert-danger" role="alert" style="text-transform: uppercase;">
+                <?= $cari; ?> tidak ditemukan
+            </div>
+        <?php endif ?>
+    
+        <div class="row ml-2">
             <?php foreach ($results as $result) : ?>
                 <div class="card mr-2 mt-5 border-success" style="width: 270px; padding:5px;">
                     <img class="card-img-top" src="foto/<?php echo $result['gambar'] ?>" height="250px" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text" hidden><?php echo $result['id_produk'] ?></p>
                         <h5 style="text-transform: uppercase;"><?php echo $result['nama_produk'] ?></h5>
                         <p class="card-text"><?php echo $result['deskripsi'] ?></p>
                     </div>
@@ -86,13 +90,10 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
     </div>
 
 
-
-
-
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-
+  </body>
 </html>

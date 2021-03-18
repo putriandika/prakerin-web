@@ -12,32 +12,64 @@
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
     <style>
-        .tombol {
-            margin-top: 25%;
+        span {
+            position: absolute;
+            right: 35px;
+            color: gray;
+            margin-top: -30px;
         }
     </style>
 
-    <title>Hello, world!</title>
+    <title>Login</title>
 </head>
 
 <body>
 
+
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 tombol">
-                <div class="row">
-                    <div class="col-md-3 mr-5">
-                        <a href="form/login.php" class="btn btn-lg btn-primary mb-3" style="width: 100px;">Login</a>
+        <h1 class="text-center mt-5 mb-5">Login Customer</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="form/doLogin.php" method="post" id="form">
+                    <div class="form-group mb-4">
+                        <label for="username" class="user">Username</label>
+                        <input type="username" class="form-control" id="username" name="username" placeholder="Username" required>
                     </div>
-                    <div class="col">
-                        <a href="form/register.php" class="btn btn-lg btn-success" style="width: 100px;">Register</a>
+                    <div class="form-group mb-4">
+                        <label for="password" class="pass">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        <span>
+                            <i class="fas fa-eye-slash" id="eyes" onclick="toggle();"></i>
+                        </span>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-success button mb-3" name="register" style="width: 100px;">Login</button>
+                    <p>Belum Punya Akun? <a href="form/register.php">Register Disini!</a></p>
+                </form>
             </div>
         </div>
     </div>
 
+
+
+
     <!-- Optional JavaScript -->
+    <script>
+        var state = false;
+
+        function toggle() {
+            if (state) {
+                document.getElementById("password").setAttribute("type", "password");
+                $("#eyes").removeClass('fas fa-eye');
+                $("#eyes").addClass('fas fa-eye-slash');
+                state = false;
+            } else {
+                document.getElementById("password").setAttribute("type", "text");
+                $("#eyes").removeClass('fas fa-eye-slash');
+                $("#eyes").addClass('fas fa-eye');
+                state = true;
+            }
+        }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

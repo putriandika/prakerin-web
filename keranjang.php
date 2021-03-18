@@ -1,28 +1,29 @@
-<?php
+<?php 
+session_start();
 
-include('koneksi.php');
-$query      = mysqli_query($connect, "SELECT * FROM produk");
-$results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
+// echo "<pre>";
+//  print_r($_SESSION['keranjang']);
+// echo "</pre>";
+
+include 'koneksi.php';
 
 ?>
+
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
-    <title>Reka Tronik</title>
-</head>
-
-<body>
-
+    <title>keranjang belanja</title>
+  </head>
+  <body>
+    
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark text-white bg-success fixed-top">
@@ -60,39 +61,48 @@ $results    = mysqli_fetch_all($query, MYSQLI_ASSOC);
         </div>
     </nav>
 
-
-    <!-- content -->
-
-    <div class="container mb-5">
-        <div class="row ml-2" style="margin-top:80px;">
-            <?php foreach ($results as $result) : ?>
-                <div class="card mr-2 mt-5 border-success" style="width: 270px; padding:5px;">
-                    <img class="card-img-top" src="foto/<?php echo $result['gambar'] ?>" height="250px" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text" hidden><?php echo $result['id_produk'] ?></p>
-                        <h5 style="text-transform: uppercase;"><?php echo $result['nama_produk'] ?></h5>
-                        <p class="card-text"><?php echo $result['deskripsi'] ?></p>
-                    </div>
-                    <div class="row">
-                        <div class="col pb-3 ml-2">
-                            <div class="pt-2 mb-2 bg-danger text-white text-center mr-2" style="width: 242px; height:39px;border-radius:5px"><label><i class="fas fa-tags mr-2"></i>Rp. <?php echo number_format($result['harga']); ?></label></div>
-                            <a href="detail_produk.php?id=<?php echo $result['id_produk'] ?>" class="btn btn-primary mb-2" style="width: 242px;"><i class="fas fa-info-circle mr-2"></i>Detail Produk</a>
-                            <a href="beli.php?id=<?php echo $result['id_produk']; ?>" class="btn btn-success" style="width: 242px;"><i class="fas fa-shopping-cart ml-3 mr-2"></i>Tambah ke Keranjang</a>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+    <section class="konten" style="margin-top: 80px;">
+        <div class='container'>
+            <h1 class="text-center mb-3">Keranjang Belanja</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        <th>SubHarga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no=1; ?>
+                    <?php foreach ($_SESSION['keranjang'] as $id => $jumlah ) : ?>
+                    <?php 
+                        $ambil= $connect->query("SELECT * FROM produk WHERE id_produk='$id' ");
+                        $pecah = $ambil->fetch_assoc();
+                        $subharga = $pecah['harga']*$jumlah;
+                    ?>
+                        <tr>
+                            <td><?= $no ?></td>
+                            <td><?= $pecah['nama_produk']; ?></td>
+                            <td>Rp. <?= number_format($pecah['harga']); ?></td>
+                            <td><?= $jumlah; ?></td>
+                            <td>Rp. <?= number_format($subharga); ?></td>
+                        </tr>
+                    <?php $no++; ?>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+            <a href="shop.php" class="btn btn-success" style="width: 150px;">Lanjutkan Belanja</a>
+            <a href="chekout.php" class="btn btn-danger" style="width:150px;">Chekout Belanja</a>
         </div>
-    </div>
+    </section>
 
 
-
-
-
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-
+  </body>
 </html>
