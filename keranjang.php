@@ -1,11 +1,12 @@
 <?php 
 session_start();
 
-// echo "<pre>";
-//  print_r($_SESSION['keranjang']);
-// echo "</pre>";
-
 include 'koneksi.php';
+
+if (empty($_SESSION['keranjang'])) {
+    echo "<script>alert ( 'keranjang kosong,silahkan belannja terlebih dahulu ' );</script>";
+    echo "<script>location='shop.php'</script>";
+}
 
 ?>
 
@@ -72,6 +73,7 @@ include 'koneksi.php';
                         <th>Harga</th>
                         <th>Jumlah</th>
                         <th>SubHarga</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,12 +84,15 @@ include 'koneksi.php';
                         $pecah = $ambil->fetch_assoc();
                         $subharga = $pecah['harga']*$jumlah;
                     ?>
-                        <tr>
+                        <tr class="text-center">
                             <td><?= $no ?></td>
                             <td><?= $pecah['nama_produk']; ?></td>
                             <td>Rp. <?= number_format($pecah['harga']); ?></td>
                             <td><?= $jumlah; ?></td>
                             <td>Rp. <?= number_format($subharga); ?></td>
+                            <td>
+                                <a href="hapuskeranjang.php?id=<?php echo $id; ?>" class="btn btn-danger">Hapus</a>
+                            </td>
                         </tr>
                     <?php $no++; ?>
                     <?php endforeach ?>
